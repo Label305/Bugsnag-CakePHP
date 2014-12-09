@@ -16,7 +16,7 @@ Include with composer
 ```json
 "extra": {
   "installer-paths": {
-    "app/Lib/bugsnag/": ["label305/bugsnag-cakephp"]
+    "core/Plugin/{$name}/": ["label305/bugsnag-cakephp"]
   }
 }
 ```
