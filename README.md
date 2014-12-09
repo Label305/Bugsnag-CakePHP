@@ -1,4 +1,4 @@
-Bugsnag for CakePHP
+Bugsnag Notifier for CakePHP
 =======
 
 This plugin allows you to use [Bugsnag](https://bugsnag.com) with CakePHP projects. Get notified when your application breaks and view detailed logs and stack traces on specific exceptions and errors.
@@ -11,7 +11,7 @@ Quick Start
 Use one of the following methods to include this library in your project.
 
 1. [Install this plugin with Composer](#install-with-composer)
-2. Place the files from this repository in `app/Plugin/BugsnagCakephp`
+2. [Place the files](#install-by-placing)
 
 Once you've included this library you should modify: `app/Config/core.php`. Make sure to enter your own API key.
 
@@ -34,25 +34,46 @@ Configure::write('Error', array(
 And make sure the plugin is loaded by adding the following line to: `app/Config/bootstrap.php`.
 
 ```php
+// place after the 'require' statement for the Bugsnag library.
 App::uses('BugsnagErrorHandler', 'BugsnagCakephp.Lib');
 ```
 
 Install with Composer
 ----
 
-Modify `composer.json` to include the following lines:
+1.  Modify `composer.json` to include the following lines:
 
-```json
-"require": {
-  "label305/bugsnag-cakephp": "0.1.*"
-},
-...
-"extra": {
-    "installer-paths": {
-        "app/Plugin/{$name}/": ["label305/bugsnag-cakephp"]
+    ```json
+    "require": {
+      "label305/bugsnag-cakephp": "0.1.*"
+    },
+    ...
+    "extra": {
+        "installer-paths": {
+            "app/Plugin/{$name}/": ["label305/bugsnag-cakephp"]
+        }
     }
-}
-```
+    ```
+
+2. Require the Bugsnag PHP library in `app/Config/bootstrap.php`.
+
+    ```php
+    require ROOT . DS . 'vendor' . DS . 'bugsnag' . DS . 'bugsnag' . DS . 'lib' . DS . 'bugsnag.php';
+    ```
+
+Install by placing
+---
+
+1.  Place the files from this repository in `app/Plugin/BugsnagCakephp`
+
+2.  Download the latest [bugsnag.phar](https://raw.github.com/bugsnag/bugsnag-php/master/build/bugsnag.phar)
+    to your PHP project.
+
+3.  Require it in `app/Config/bootstrap.php`.
+
+    ```php
+    require_once "/path/to/bugsnag.phar";
+    ```
 
 And run `composer update`.
 
