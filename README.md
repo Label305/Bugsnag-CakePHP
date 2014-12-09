@@ -20,3 +20,13 @@ Include with composer
   }
 }
 ```
+
+```php
+//in app/Config/core.php
+Configure::write('Error.handler', 'AppError::handleError');
+```
+
+```php
+//in app/Config/bootstrap.php
+App::uses('BugsnagError', 'Plugin/BugsnagCakephp/Lib');
+```
