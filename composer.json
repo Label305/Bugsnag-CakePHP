@@ -1,0 +1,17 @@
+{
+	"name": "label305/bugsnag-cakephp",
+	"type": "cakephp-plugin",
+	"description": "Bugsnag Notifier for CakePHP applications",
+	"keywords": ["cakephp", "bugsnag"],
+	"license": "Apache v2",
+	"authors": [
+		{
+			"name": "Thijs Scheepers",
+			"homepage": "http://www.label305.com"
+		}
+	],
+	"require": {
+		"composer/installers": "*",
+		"bugsnag/bugsnag": "1.*"
+	}
+}
