@@ -3,6 +3,8 @@ Bugsnag for CakePHP
 
 This plugin allows you to use [Bugsnag](https://bugsnag.com) with CakePHP projects. Get notified when your application breaks and view detailed logs and stack traces on specific exceptions and errors.
 
+The `BugsnagErrorHandler` class extends the default CakePHP `ErrorHandler` so the functions of the built in class continue to work.
+
 Quick Start
 ---------
 
@@ -17,13 +19,13 @@ Once you've included this library you should modify: `app/Config/core.php`. Make
 Configure::write('BugsnagCakephp.apikey', '{yourbugsnagapikey}');
 
 Configure::write('Exception', array(
-    'handler' => 'BugsnagError::handleException',
+    'handler' => 'BugsnagErrorHandler::handleException',
     'renderer' => 'ExceptionRenderer',
     'log' => true
 ));
 
 Configure::write('Error', array(
-    'handler' => 'BugsnagError::handleError',
+    'handler' => 'BugsnagErrorHandler::handleError',
     'level' => E_ALL & ~E_DEPRECATED,
     'trace' => true
 ));
@@ -32,7 +34,7 @@ Configure::write('Error', array(
 And make sure the plugin is loaded by adding the following line to: `app/Config/bootstrap.php`.
 
 ```php
-App::uses('BugsnagError', 'BugsnagCakephp.Lib');
+App::uses('BugsnagErrorHandler', 'BugsnagCakephp.Lib');
 ```
 
 Install with Composer

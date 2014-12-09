@@ -30,7 +30,7 @@ Bugsnag::register( Configure::read('BugsnagCakephp.apikey') );
  * after sending errors to Bugsnag it will call the regular ErrorHandler and handle
  * errors the regular way.
  */
-class BugsnagError extends ErrorHandler
+class BugsnagErrorHandler extends ErrorHandler
 {
     public static function handleError($code, $description, $file = null, $line = null, $context = null)
     {
