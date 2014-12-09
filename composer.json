@@ -13,5 +13,8 @@
 	"require": {
 		"composer/installers": "*",
 		"bugsnag/bugsnag": "1.*"
-	}
+	},
+	"autoload": {
+        "classmap": [ "src/" ]
+    }
 }
