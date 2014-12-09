@@ -55,6 +55,8 @@ Install with Composer
     }
     ```
 
+3.  And run `composer update`.
+
 2. Require the Bugsnag PHP library in `app/Config/bootstrap.php`.
 
     ```php
@@ -74,8 +76,6 @@ Install by placing
     ```php
     require_once "/path/to/bugsnag.phar";
     ```
-
-And run `composer update`.
 
 License
 ---------
