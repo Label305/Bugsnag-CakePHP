@@ -8,7 +8,7 @@ Quick Start
 
 Use one of the following methods to include this library in your project.
 
-1. [Install this plugin with Composer](#composer)
+1. [Install this plugin with Composer](#install-with-composer)
 2. Place the files from this repository in `app/Plugin/BugsnagCakephp`
 
 Once you've included this library you should modify: `app/Config/core.php`. Make sure to enter your own API key.
