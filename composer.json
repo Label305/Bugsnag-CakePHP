@@ -11,7 +11,7 @@
 		}
 	],
 	"require": {
-		"composer/installers": "*",
+		"ext-mbstring": "*",
 		"bugsnag/bugsnag": "2.*"
 	}
 }
