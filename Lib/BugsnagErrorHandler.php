@@ -37,12 +37,18 @@ class BugsnagErrorHandler extends ErrorHandler
     {
         static $bugsnag = null;
         if (null === $bugsnag) {
-            $bugsnag = new Bugsnag_Client(Configure::read('BugsnagCakephp.apikey'));
+            $bugsnag = new \Bugsnag_Client(Configure::read('BugsnagCakephp.apikey'));
+            $bugsnag->setBatchSending(false);
+            $bugsnag->setNotifier(array(
+                'name'    => 'Bugsnag CakePHP',
+                'version' => '0.1.0',
+                'url'     => 'https://github.com/Label305/bugsnag-cakephp'
+            ));
         }
 
         return $bugsnag;
     }
-    
+
     public static function handleError($code, $description, $file = null, $line = null, $context = null)
     {
         static::getBugsnag()->errorHandler($code, $description, $file, $line, $context);
