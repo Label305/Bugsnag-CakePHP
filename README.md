@@ -60,7 +60,7 @@ Install with Composer
 2. Require the Bugsnag PHP library in `app/Config/bootstrap.php`.
 
     ```php
-    require ROOT . DS . 'vendor' . DS . 'bugsnag' . DS . 'bugsnag' . DS . 'lib' . DS . 'bugsnag.php';
+    require ROOT . DS . 'vendor' . DS . 'bugsnag' . DS . 'bugsnag' . DS . 'build' . DS . 'bugsnag.phar';
     ```
 
 Install by placing
@@ -74,7 +74,7 @@ Install by placing
 3.  Require it in `app/Config/bootstrap.php`.
 
     ```php
-    require_once "/path/to/bugsnag.phar";
+    require_once 'path' . DS . 'to' . DS . 'bugsnag.phar';
     ```
 
 License
