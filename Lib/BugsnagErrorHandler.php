@@ -21,8 +21,6 @@
  * limitations under the License.
  */
 
-Bugsnag::register( Configure::read('BugsnagCakephp.apikey') );
-
 /**
  * @class BugsnagError
  *
@@ -32,15 +30,28 @@ Bugsnag::register( Configure::read('BugsnagCakephp.apikey') );
  */
 class BugsnagErrorHandler extends ErrorHandler
 {
+    /**
+     * @return Bugsnag_Client
+     */
+    public static function getBugsnag()
+    {
+        static $bugsnag = null;
+        if (null === $bugsnag) {
+            $bugsnag = new Bugsnag_Client(Configure::read('BugsnagCakephp.apikey'));
+        }
+
+        return $bugsnag;
+    }
+    
     public static function handleError($code, $description, $file = null, $line = null, $context = null)
     {
-        Bugsnag::errorHandler($code, $description, $file, $line, $context);
+        static::getBugsnag()->errorHandler($code, $description, $file, $line, $context);
         return parent::handleError($code, $description, $file, $line, $context);
     }
 
     public static function handleException(Exception $exception)
     {
-        Bugsnag::exceptionHandler($exception);
+        static::getBugsnag()->exceptionHandler($exception);
         return parent::handleException($exception);
     }
 }
