@@ -76,6 +76,8 @@ Install by placing
     ```php
     require_once 'path' . DS . 'to' . DS . 'bugsnag.phar';
     ```
+    
+4. Make sure the php extention `mbstring` is installed.
 
 License
 ---------
