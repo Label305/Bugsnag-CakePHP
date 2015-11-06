@@ -63,7 +63,21 @@ class BugsnagErrorHandler extends ErrorHandler
 
     public static function handleException(Exception $exception)
     {
-        static::getBugsnag()->exceptionHandler($exception);
+        if (!static::isSkipException($exception)) {
+            static::getBugsnag()->exceptionHandler($exception);
+        }
         return parent::handleException($exception);
+    }
+
+    private static function isSkipException(Exception $exception) {
+        $skipLog = Configure::read('Exception.skipLog');
+        if (!empty($skipLog)) {
+            foreach ((array)$skipLog as $class) {
+                if ($exception instanceof $class) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
