@@ -44,6 +44,12 @@ class BugsnagErrorHandler extends ErrorHandler
                 'version' => '0.1.0',
                 'url'     => 'https://github.com/Label305/bugsnag-cakephp'
             ));
+            $bugsnag->setReleaseStage(Configure::read('BugsnagCakephp.releaseStage'));
+            $bugsnag->setType("CakePHP");
+            $filters = Configure::read('BugsnagCakephp.filters');
+            if (!empty($filters)) {
+                $bugsnag->setFilters($filters);
+            }
         }
 
         return $bugsnag;
