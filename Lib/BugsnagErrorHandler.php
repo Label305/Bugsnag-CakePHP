@@ -22,62 +22,27 @@
  */
 
 /**
- * @class BugsnagError
+ * @class BugsnagErrorHandler
  *
  * The Bugsnag Error will handle erros and exceptions and send them to bugsnag.
  * after sending errors to Bugsnag it will call the regular ErrorHandler and handle
  * errors the regular way.
  */
+require_once dirname(__FILE__).DS.'BaseBugsnagErrorHandler.php';
 class BugsnagErrorHandler extends ErrorHandler
 {
-    /**
-     * @return Bugsnag_Client
-     */
-    public static function getBugsnag()
-    {
-        static $bugsnag = null;
-        if (null === $bugsnag) {
-            $bugsnag = new \Bugsnag_Client(Configure::read('BugsnagCakephp.apikey'));
-            $bugsnag->setBatchSending(false);
-            $bugsnag->setNotifier(array(
-                'name'    => 'Bugsnag CakePHP',
-                'version' => '0.1.0',
-                'url'     => 'https://github.com/Label305/bugsnag-cakephp'
-            ));
-            $bugsnag->setReleaseStage(Configure::read('BugsnagCakephp.releaseStage'));
-            $bugsnag->setType("CakePHP");
-            $filters = Configure::read('BugsnagCakephp.filters');
-            if (!empty($filters)) {
-                $bugsnag->setFilters($filters);
-            }
-        }
-
-        return $bugsnag;
+    use BaseBugsnagErrorHandler {
+        BaseBugsnagErrorHandler::handleError as bugsnagHandleError;
+        BaseBugsnagErrorHandler::handleException as bugsnagHandleException;
     }
 
-    public static function handleError($code, $description, $file = null, $line = null, $context = null)
-    {
-        static::getBugsnag()->errorHandler($code, $description, $file, $line, $context);
+    public static function handleError($code, $description, $file = null, $line = null, $context = null) {
+        self::bugsnagHandleError($code, $description, $file, $line, $context);
         return parent::handleError($code, $description, $file, $line, $context);
     }
 
-    public static function handleException(Exception $exception)
-    {
-        if (!static::isSkipException($exception)) {
-            static::getBugsnag()->exceptionHandler($exception);
-        }
+    public static function handleException(Exception $exception) {
+        self::bugsnagHandleException($exception);
         return parent::handleException($exception);
-    }
-
-    private static function isSkipException(Exception $exception) {
-        $skipLog = Configure::read('Exception.skipLog');
-        if (!empty($skipLog)) {
-            foreach ((array)$skipLog as $class) {
-                if ($exception instanceof $class) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
