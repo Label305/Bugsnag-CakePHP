@@ -9,6 +9,7 @@ class BugsnagUtils {
             'url'     => 'https://github.com/Label305/bugsnag-cakephp'
         ));
         $bugsnag->setReleaseStage(Configure::read('BugsnagCakephp.releaseStage'));
+        $bugsnag->setNotifyReleaseStages(Configure::read('BugsnagCakephp.notifyReleaseStages'));
         $bugsnag->setType("CakePHP");
         $filters = Configure::read('BugsnagCakephp.filters');
         if (!empty($filters)) {
