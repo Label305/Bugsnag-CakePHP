@@ -55,7 +55,7 @@ class BugsnagErrorHandler extends ErrorHandler
         return parent::handleError($code, $description, $file, $line, $context);
     }
 
-    public static function handleException(Exception $exception)
+    public static function handleException($exception)
     {
         static::getBugsnag()->exceptionHandler($exception);
         return parent::handleException($exception);
